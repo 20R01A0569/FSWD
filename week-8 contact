@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"net/http"
+)
+
+type ContactDetails struct {
+	Name    string
+	Email   string
+	Subject string
+	Message string
+}
+
+func main() {
+	tmpl := template.Must(template.ParseFiles("contact.html"))
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl.Execute(w, nil)
+			return
+		}
+		ContactDetails := ContactDetails{
+			Name:    r.FormValue("name"),
+			Email:   r.FormValue("email"),
+			Subject: r.FormValue("subject"),
+			Message: r.FormValue("message"),
+		}
+		fmt.Printf("%+v\n", ContactDetails)
+		tmpl.Execute(w, struct{ Success bool }{true})
+	})
+
+	http.ListenAndServe(":8080", nil)
+}
+
+2.contcact.html
+
+{{if .Success}}
+<p>Your message has been sent!</p>
+{{else}}
+<p>Contact</p>
+<form action="/contact" method="POST">
+    <label>Name:</label><br />
+    <input type="text" name="name"><br />
+    <label>Email:</label><br />
+    <input type="text" name="email"><br />
+    <label>Subject:</label><br />
+    <input type="text" name="subject"><br />
+    <label>Message:</label><br />
+    <textarea name="message"></textarea><br /><br />
+    <input type="submit">
+</form>
+{{end}}
+
+
+
+
+
+
+
+
+
+
+
