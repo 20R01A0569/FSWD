@@ -1,0 +1,178 @@
+Week-1:
+package main
+
+import "fmt"
+func gcd (temp1 int,temp2 int) int{
+if(temp1==0){
+return temp2
+}
+return gcd (temp2%temp1,temp1)
+}
+func main() {
+var n1,n2 int
+fmt.Println("Enter two positive integers : ")
+fmt.Scan(&n1)
+fmt. Scan(&n2)
+fmt.Printf("GCD of %d and %d is %d\n",n1,n2, gcd(n1,n2))
+fmt.Printf("LCM of %d and %d is %d",n1,n2,(n1*n2)/gcd (n1,n2))
+
+}
+
+
+
+Week-2:
+package main
+
+import "fmt"
+
+func main() {
+var rows, temp int
+fmt.Print("Enter number of rows :")
+fmt.Scan(&rows)
+for i := 1; i <= rows; i++ {
+temp=i
+for j := 1; j <= rows-i; j++ {
+fmt.Print("  ")
+}
+for j := 1; j <= i; j++{
+fmt.Print(" ", temp)
+temp++;
+}
+temp--;
+for{
+if(temp==i){
+break
+}
+temp--;
+fmt.Print(" ",temp)
+}
+fmt.Println()
+}
+
+}
+
+
+
+Week-3:
+package main
+import (
+parent "family/father"
+child "family/father/son"
+"fmt"
+)
+func main() {
+f := new(parent.Father)
+fmt.Println(f.Data("Mr. Jeremy Maclin"))
+c := new(child.Son)
+fmt.Println(c.Data("Riley Maclin"))
+}
+package father
+import "fmt"
+func init() {
+fmt.Println("Father package initialized")
+}
+type Father struct {
+Name string
+}
+func (f Father) Data(name string) string {
+f.Name = "Father : " + name
+return f.Name
+}
+
+package son
+import "fmt"
+func init() {
+fmt.Println("Son package initialized")
+}
+type Son struct {
+Name string
+}
+func (s Son) Data(name string) string {
+s.Name = "Son : " + name
+return s.Name
+}
+
+
+
+Week-4:
+package main
+
+import (
+"fmt"
+"math"
+)
+func main(){
+    var num[10] float64
+    var sum,mean,sd float64
+    fmt.Println("** Enter 10 elements ***")
+    for i := 1; i <= 10; i++ {
+        fmt.Printf("Enter %d element : ",i)
+        fmt.Scan(&num[i-1])
+    sum += num[i-1]
+    }
+    mean = sum/10;
+    for j := 0; j < 10; j++ {
+        sd += math.Pow(num[j] - mean, 2)
+    }
+    sd = math.Sqrt(sd/10)
+    fmt.Println("The Standard Deviation is : ",sd)
+}
+
+
+
+Week-5:
+package main
+import "fmt"
+func main(){
+    var rows int
+    var temp int = 1
+    fmt.Print("Enter number of rows : ")
+    fmt.Scan(&rows)
+    for i := 1; i <= rows; i++ {
+        for k := 1; k <= i; k++ {
+            fmt.Printf(" %d",temp)
+            temp++
+        }
+        fmt.Println("")
+    }
+}
+
+
+
+Week-6:
+package main
+import "fmt"
+func main() {
+    fmt.Print("Enter First String: ")
+    var first,second string    
+    fmt.Scanln(&first)
+    fmt.Print("Enter Second String: ")
+    fmt.Scanln(&second)
+    fmt.Print("The Added String is:"+(first + second))
+}
+
+
+
+Week-7:
+package main
+import "fmt"
+func main() {
+    var str string
+    fmt.Print("Enter String: ")
+    fmt.Scan(&str)
+    var ispalindrome bool
+    ispalindrome=true
+    length:=len(str)
+    for i:=0;i<length;i++{
+        if(str[i]!=str[length-1-i]){
+            ispalindrome=false
+            break
+        }
+    }
+    if(ispalindrome){
+        fmt.Printf("Number %s is a Palindrome",str)
+    }else{
+        fmt.Printf("Number %s is not a Palindrome",str)
+    }
+}
+
